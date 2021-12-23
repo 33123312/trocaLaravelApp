@@ -1,0 +1,28 @@
+.head-cont{
+    background-color: #2d1909;
+    padding-right: 7%;
+    padding-left: 7%;
+
+}
+
+.tit-1{
+    margin-right:0.5rem ;
+    color: #f6f0de;
+}
+
+.tit-2{
+    color: #e8a715;
+}
+
+.tit-cont{
+    display: flex;
+}
+
+nav ul a{
+    color:rgb(241, 227, 217);
+    font-size: 13pt;
+}
+
+.ses-btn-col{
+    background-color: #e89f10;
+}

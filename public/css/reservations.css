@@ -1,0 +1,26 @@
+
+.page-sec{
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.dis-dates-advisor{
+    width: 75%;
+    padding:1rem;
+    color: rgb(241, 227, 217);
+    background-color: #d26a26;  
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: large;
+
+
+}
+
+.card-input{
+    padding: 0.5rem;
+    background-color: rgb(240, 236, 227);
+    border-radius: 2px;
+    margin-top:1rem;
+    margin-bottom:1rem;
+}

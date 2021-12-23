@@ -1,0 +1,18 @@
+.res-cont{
+    border-top: 1px solid gainsboro;
+    padding: 1rem;
+    background-color: white;
+    color: #837d79;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15pt;
+}
+
+h5{
+    padding-bottom: 1rem;
+    padding-top: 4rem;
+}
+
+.btn-cancelar-res{
+    background-color: #a42a2a;
+}
