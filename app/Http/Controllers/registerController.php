@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+
 
 class registerController extends Controller
 {
@@ -34,13 +37,27 @@ class registerController extends Controller
             "password" => Hash::make($req->password)
         ];
 
-        User::create(
-            $info
-        );
+        $user = User::create($info);
+        event(new Registered($user));
+
 
         auth()->attempt($req->only("email","password"));
         
-        return redirect()->route("landing");
+        return redirect()->route("verification.notice");
+    }
+
+    public function oauthFac($dri){
+        return Socialite::driver($dri)->redirect();
+    }
+
+    public function oauthFacCall($dri){
+        $user = Socialite::driver($dri)->user()
+        ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+        ->user();
+
+        dd($user);
+
+        //return redirect()->route("landing");
     }
 }
 

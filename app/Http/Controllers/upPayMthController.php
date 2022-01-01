@@ -13,11 +13,9 @@ class upPayMthController extends Controller
 
             $user->createOrGetStripeCustomer();
             
-            if($req->payment_method){
-                $paymentMethod = $req->payment_method;
-                $user->updateDefaultPaymentMethod($paymentMethod);
-            }
-        
+            if($req->payment_method)
+                $user->updateDefaultPaymentMethod($req->payment_method);
+            
             $payMet = $user->defaultPaymentMethod();
 
             $user->charge(10,$payMet);

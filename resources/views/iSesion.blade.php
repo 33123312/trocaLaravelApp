@@ -25,6 +25,10 @@
       <div class="text-danger">{{session("status")}}</div>      
   @endif
 
+  <div class="form-group">
+    <p>¿Olvidaste tu contraseña?, <a href="{{route("password.request")}}">click aquí para reestablecerla</a></p>
+  </div>
+
   <button type="submit" class="btn btn-color">Iniciar Sesión</button>
 </form>
 

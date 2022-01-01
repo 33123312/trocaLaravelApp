@@ -1,0 +1,35 @@
+.ver-mess{
+    width:50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.ver-mess h1{
+    text-align: center;
+    color: #946b11;
+}
+
+.ver-mess p{
+    text-align: center;
+    color: #413e37;
+    font-size: larger;
+}
+
+.resend-area{
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    margin: auto;
+}
+
+.resend-area form{
+    margin-left:1rem ;
+}
+
+@media (max-width: 480px) {
+
+    .ver-mess{
+        width:100%;
+    }
+}

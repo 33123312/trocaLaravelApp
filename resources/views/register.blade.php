@@ -60,6 +60,8 @@
 
       <button type="submit" class="btn btn-color">Registrarse</button>
     </form>
+    <a href="{{route("fac-log","facebook")}}" type="submit" class="btn btn-color">Facebook</a>
+    <a href="{{route("fac-log","google")}}" type="submit" class="btn btn-color">Google</a>
   </section>
 @endsection
 
