@@ -51,9 +51,7 @@ class registerController extends Controller
     }
 
     public function oauthFacCall($dri){
-        $user = Socialite::driver($dri)->user()
-        ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
-        ->user();
+        $user = Socialite::driver($dri)->user();
 
         dd($user);
 
