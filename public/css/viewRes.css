@@ -8,11 +8,37 @@
     font-size: 15pt;
 }
 
-h5{
+h3{
     padding-bottom: 1rem;
-    padding-top: 4rem;
+    padding-top: 2rem;
+}
+
+h6{
+    padding-bottom: 1rem;
 }
 
 .btn-cancelar-res{
     background-color: #a42a2a;
 }
+
+.res-ver-msg-1{
+    color:#85ac2a;
+    font-size: large;
+}
+
+
+.res-ver-msg-0{
+    color:#a73223;
+    font-size: large;
+}
+
+.info-cont{
+    display: flex;
+    align-items: center;
+}
+
+.info-cont div{
+    margin-right: 1rem;
+}
+
+

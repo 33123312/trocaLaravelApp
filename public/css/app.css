@@ -7,6 +7,10 @@
 
 }
 
+.text-danger{
+  color: rgb(160, 45, 9);
+}
+
 .page-sec-cen{
     display: flex;
     justify-content: center;

@@ -14,7 +14,6 @@
     margin-bottom: 10px;
     font-size: large;
 
-
 }
 
 .card-input{
@@ -23,4 +22,12 @@
     border-radius: 2px;
     margin-top:1rem;
     margin-bottom:1rem;
+}
+
+.hours-container{
+    display: flex;
+}
+
+.hours-container input{
+    margin-left: 1rem;
 }

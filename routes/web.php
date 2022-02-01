@@ -6,24 +6,18 @@ use App\Http\Controllers\ISesionController;
 use App\Http\Controllers\landingController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\registerController;
+use App\Http\Controllers\resAdminController;
 use App\Http\Controllers\reservationsController;
 use App\Http\Controllers\upPayMthController;
+use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\viewResController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/registrarse', [registerController::class,"view"])->name("registrarse");
 Route::post('/registrarse', [registerController::class,"store"]);
 
-Route::get('/iSesion', [ISesionController::class,"view"])->name("iSesion");
-Route::post('/iSesion', [ISesionController::class,"store"]);
-
-Route::middleware("verified")->group(function(){
-    Route::get('/reservation', [reservationsController::class,"view"])->name("reservation");
-    Route::post('/reservation', [reservationsController::class,"store"]);
-    Route::delete('/reservation/{res}', [reservationsController::class,"destroy"])->name("reservation.del");
-});
-
-
+Route::get('/login', [ISesionController::class,"view"])->name("login");
+Route::post('/login', [ISesionController::class,"store"]);
 
 Route::post("/logOut",[LogOutController::class,"store"])->name("LogOut");
 
@@ -52,3 +46,23 @@ Route::get('/oauth/{dri}',[registerController::class,"oauthFac"])->name("fac-log
 Route::get('/oauth/{dri}/call',[registerController::class,"oauthFacCall"]);
 
 Route::delete("/deleteUser");
+
+Route::middleware("verified")->prefix("/user")->group(function(){
+    Route::get('/reservation', [reservationsController::class,"view"])->name("reservation");
+    Route::post('/reservation', [reservationsController::class,"store"]);
+    Route::delete('/reservation/{res}', [reservationsController::class,"destroy"])->name("reservation.del");
+    Route::get("/notifications",[UserNotificationController::class,"index"])->name("notifications");
+    Route::post("/notifications",[UserNotificationController::class,"store"]);
+});
+
+Route::middleware("auth:admin")->prefix("/admin")->group(function(){
+    Route::get("/resAdminVer",[resAdminController::class,"index"])->name("resAdmin");
+    Route::post("/resAdmin/{res}",[resAdminController::class,"store"])->name("resAdmin.ver");
+    Route::delete("/resAdmin/{res}",[resAdminController::class,"destroy"])->name("resAdmin.del");
+    
+    Route::delete("/refound/{ref}",[resAdminController::class,"refound"])->name("refound");
+
+    Route::post("/logOut",[LogOutController::class,"adminLog"])->name("resAdmin.logOut");
+    
+
+});

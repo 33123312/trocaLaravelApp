@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ISesionController extends Controller
 {
@@ -14,16 +15,29 @@ class ISesionController extends Controller
     function store(Request $req){
         $this->validate($req,
             [
-                "email"=> "required|email",
+                "email"=> "required",
                 "password"=> "required"
             ]
         );
 
-
-        $logged = auth()->attempt($req->only("email","password"));
-        if(!$logged)
+        if(
+            Auth::guard('admin')->attempt($this->toAdmin($req)) || 
+            Auth::attempt($req->only("email","password"))
+        ){
+            return redirect()->route("landing");
+        } else {
             return back() -> with("status","Contraseña o correo incorrecto");
-
-        return redirect()->route("landing");
+        }        
+        
     } 
+
+
+    private function toAdmin($cred)
+    {
+        return     
+        [
+            "name"=>$cred->email,
+            "password"=>$cred->password,
+        ];
+    }
 }

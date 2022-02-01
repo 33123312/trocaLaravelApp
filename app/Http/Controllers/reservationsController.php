@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PaymentVerificationCheckerJob;
 use App\Models\reservation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class reservationsController extends Controller
@@ -10,10 +12,12 @@ class reservationsController extends Controller
 
     public function view(Request $req){
         $thisClass = $this;
+
+
         return view("reservations",
         [
-            "res"=>$thisClass->getUnaviabledates(),
-            "hpm"=>$req->user()->hasDefaultPaymentMethod()]
+            "res"=>$thisClass->getUnaviabledates()
+        ]
         );
     }
 
@@ -29,19 +33,29 @@ class reservationsController extends Controller
 
     public function store(Request $req){
         $this->validate($req,[
-            "resDate"=> "required"
+            "resDate"=> "required",
+            "init_hour"=>"required",
+            "end_hour"=>"required",
         ]);
 
-        $req->user()->reservations()->create([
-            "resDate"=>$req->resDate
+        $res = $req->user()->reservations()->create([
+            "resDate"=>$req->resDate,
+            "init_hour"=>$this->parseHour($req->init_hour),
+            "end_hour"=>$this->parseHour($req->end_hour),
         ]);
 
-        return redirect()->route("landing");
+        PaymentVerificationCheckerJob::dispatch($res)->delay(now()->addMinutes(60));
+
+        return redirect()->route("viewRes");
+    }
+
+    public function parseHour($hour){
+        return Carbon::parse($hour)->format("h:m:s");
     }
 
     public function destroy(reservation $res){
-        $res->delete();
-        return back();
+        $res->refoundOrDelete();
+        return response()->json(['success' => 'success'], 200);
     }
 
 }

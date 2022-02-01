@@ -1,0 +1,30 @@
+.not-area{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.not-area > div {
+    border-bottom: 0.5px solid rgb(219, 205, 205);
+    padding:1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: white;
+
+    
+}
+
+
+.not-area  div >div{
+    font-size: small;
+    color:#79705c ;
+    font-weight: 200;
+    
+}
+
+.unreaded-not{
+    background-color: #fff6e3 !important;
+}
+

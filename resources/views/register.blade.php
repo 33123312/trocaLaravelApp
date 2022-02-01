@@ -4,20 +4,11 @@
     <form class="form-res" action="{{route('registrarse')}}" method="POST">
         @csrf
       <div class="form-group">
-        <label for="firstn">Nombres</label>
+        <label for="nickname">Nombres</label>
         <input type="text" class="form-control" name="firstn"
-        id="firstn" aria-describedby="emailHelp" placeholder="Nombres"
-        value="{{old('firstn')}}"
-        @error('firstn')
-        <div class="fs-6 text-danger"> {{$message}}</div>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="lastn">Apellidos</label>
-        <input type="text" class="form-control" name="lastn" id="lastn" 
-        aria-describedby="emailHelp" placeholder="Apellidos" value="{{old('lastn')}}">
-        @error('lastn')
+        id="nickname" aria-describedby="emailHelp" placeholder="Nombres"
+        value="{{old('nickname')}}"
+        @error('nickname')
         <div class="fs-6 text-danger"> {{$message}}</div>
         @enderror
       </div>

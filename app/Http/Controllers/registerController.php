@@ -21,8 +21,7 @@ class registerController extends Controller
 
         $this->validate($req,
             [
-                "firstn"=> "required",
-                "lastn"=> "required",
+                "nickname"=> "nickname",
                 "pnumber"=> "required",
                 "email"=> "required|email",
                 "password"=> "required|confirmed"
@@ -30,8 +29,7 @@ class registerController extends Controller
         );
 
         $info = [
-            "firstn" => $req->firstn,
-            "lastn" => $req->lastn,
+            "nickname" => $req->nickname,
             "pnumber" => $req->pnumber,
             "email" => $req->email,
             "password" => Hash::make($req->password)

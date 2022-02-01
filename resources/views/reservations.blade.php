@@ -8,67 +8,39 @@
 
 @section('page')
 <section class="page-sec page-sec-cen ">
-  <div class="dis-dates-advisor">
-    Aviso: Hay algunas fechas que no son elegibles ya que están ocupadas por otros clientes.
-  </div>
   <form id="form-res" class= "form-res" action="{{route("reservation")}}" method="POST">
     @csrf
     <div class="form-group">
       <label for="resDate">Fecha de la reservación</label>
       <input type="text" class="datepicker" name="resDate"  id="resDate" placeholder="Ingresar fecha de la reservación">
+      <div style="margin-bottom: 1rem;">Hay algunas fechas que no son elegibles ya que están ocupadas por otros clientes.</div>
     </div>
+    <div class = "hours-container">
+      <input type="text" class="timepicker" name="init_hour"  id="init_hour" placeholder="Desde">
+
+      <input type="text" class="timepicker" name="end_hour"  id="end_hour" placeholder="Hasta">
+    </div>
+
+      
+      
     @error('resDate')
         <div class="error-msg"> {{$message}}</div>
     @enderror
 
-    @if ($hpm)
-      <button class="btn btn-color">Hacer reservación</button>
-    @else
-      <input type="hidden" name="payment_method" class="payment-method">
-      <label for="resDate">Nombre del dueño de la tarjeta</label>
-      <input card-input id="card-holder-name" type="text">
-      <div id="card-element" class="card-input"></div>
-      <button type="button" id="card-button" class="btn btn-color">Hacer reservación</button>
-    @endif
+    <button class="btn btn-color">Hacer reservación</button>
+
   </form>
+
+  <h6 class="form-res">
+    Una vez hecha la reservación, 
+    tiene una hora para realizar el pago, de no realizarse en ese lapso de tiempo la reservación se borrará,
+    una vez se haya verificado el pago, recibirá un email confirmandolo, dicho proceso
+    puede tardar varios minutos.
+  </h6>
+
 </section>
 
-<script>
-    const stripe = Stripe('stripe-public-key');
 
-    const elements = stripe.elements();
-    const cardElement = elements.create('card');
-
-    cardElement.mount('#card-element');
-</script>
-
-<script>
-  const cardHolderName = document.getElementById('card-holder-name');
-  const cardButton = document.getElementById('card-button');
-
-  cardButton.addEventListener('click', 
-  async (e) => {
-
-      const { paymentMethod, error } = await stripe.createPaymentMethod(
-          'card',
-           cardElement,
-          {
-              billing_details: {
-                 name: cardHolderName.value 
-              }
-          }
-      );
-
-      if (error) 
-        $(".card-input").after("<div class='error-msg'>" + error.message + "</div>")
-      else {
-        $('.payment-method').val(paymentMethod)
-        document.getElementById("form-res").submit();
-      }
-        
-      
-  });
-</script>
 
 <script>
     
@@ -80,6 +52,8 @@
         let trimed = element.split("-")
         dates.push(new Date(trimed[0],trimed[1]-1,trimed[2]).toDateString());
       });
+
+      $('.timepicker').timepicker();
 
       $('.datepicker').datepicker({ 
           firstDay: true, 
