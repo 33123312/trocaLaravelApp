@@ -21,7 +21,7 @@ class registerController extends Controller
 
         $this->validate($req,
             [
-                "nickname"=> "nickname",
+                "nickname"=> "required",
                 "pnumber"=> "required",
                 "email"=> "required|email",
                 "password"=> "required|confirmed"
