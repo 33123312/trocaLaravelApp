@@ -4,8 +4,8 @@
     <form class="form-res" action="{{route('registrarse')}}" method="POST">
         @csrf
       <div class="form-group">
-        <label for="nickname">Nombres</label>
-        <input type="text" class="form-control" name="firstn"
+        <label for="nickname">Nombre de Usuario</label>
+        <input type="text" class="form-control" name="nickname"
         id="nickname" aria-describedby="emailHelp" placeholder="Nombres"
         value="{{old('nickname')}}"
         @error('nickname')
