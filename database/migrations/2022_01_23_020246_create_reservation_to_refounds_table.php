@@ -17,7 +17,7 @@ class CreateReservationToRefoundsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer("amount");
-            $table->date("canceled_at");
+            $table->string("canceled_by");
             $table->foreignId("reservation_id")->constrainted()->onDelete("cascade");
 
         });
